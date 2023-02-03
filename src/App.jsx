@@ -1,53 +1,46 @@
-import { useEffect, useState } from 'react';
-import { useForm, FormProvider, useFormContext } from 'react-hook-form';
+import { useEffect, useMemo, useState } from 'react';
+import { useForm, FormProvider, useFormContext, useWatch } from 'react-hook-form';
 import Summary from './components/Summary';
-import DeliveryDetails from './form/DeliveryDetails';
-import Shipment from './form/Shipment';
-import ThanksPage from './form/ThanksPage';
+import DeliveryDetailStep from './form/DeliveryDetailStep';
+import ShipmentStep from './form/ShipmentStep';
+import ThanksPageStep from './form/ThanksPageStep';
 import useMultistep from './utils/useMultistep';
 
 const pageStep = ["Delivery", "Payment", "Finish"]
 const backPageStep = ["Cart", "Delivery"]
+const defaultValue = {
+  goods: 500000, dropshipFee: 0, 'Send as dropshipper': false, Shipment: { label: '', estimation: '', price: 0 }
+}
 
 function App() {
-  const [data, setData] = useState({ goods: 500000, dropshipFee: 0, 'Send as dropshipper': false, Shipment: { label: '', estimation: '', price: 0 } });
   const methods = useForm({
-    defaultValues: async () => {
+    defaultValues: useMemo(() => {
       const itemSaved = JSON.parse(localStorage.getItem('itemSaved'))
-      console.log(itemSaved)
       if (itemSaved) return itemSaved
-      return { goods: 500000, dropshipFee: 0, 'Send as dropshipper': false, Shipment: { label: '', estimation: '', price: 0 } }
-    }
+      return defaultValue
+    }, [defaultValue])
   });
-  const value = methods.getValues()
-  console.log(value)
-
+  const data = methods.watch();
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistep([
-      <DeliveryDetails {...data} setData={setData} />,
-      <Shipment {...data} />,
-      <ThanksPage {...data} />,
+      <DeliveryDetailStep />,
+      <ShipmentStep />,
+      <ThanksPageStep />,
     ]);
 
   const onSubmit = (data) => {
     if (!isLastStep) return next();
-    methods.setValue('Page State', pageStep[currentStepIndex]);
   }
 
   const handleChange = () => {
-    const value = methods.getValues()
-    setData((prev) => {
-      return { ...prev, ...value };
-    })
-    localStorage.setItem('itemSaved', JSON.stringify(value));
-    console.log(data);
+    // localStorage.setItem('itemSaved', JSON.stringify(data));
+    console.log(data)
   }
 
-  // useEffect(() => {
-  //   const valueSaved = JSON.parse(localStorage.getItem('itemSaved'));
-  //   setData(valueSaved)
-  //   console.log('getitem', data);
-  // }, [])
+  useEffect(() => {
+    localStorage.setItem('itemSaved', JSON.stringify(data));
+    if (isLastStep) return localStorage.removeItem('itemSaved');
+  }, [data, currentStepIndex])
 
   return (
     <FormProvider {...methods} >
@@ -74,7 +67,7 @@ function App() {
 
           {!isLastStep && <button type="submit">{currentStepIndex !== steps.length - 2 ? 'Continue to Payment' : data.Payment ? `Pay with ${data.Payment}` : 'Pay'}</button>}
         </div>
-        <Summary {...data} />
+        <Summary />
       </form>
     </FormProvider>
   );

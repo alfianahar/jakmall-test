@@ -1,19 +1,14 @@
 import { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 
-const DeliveryDetails = ({ setData, Shipment }) => {
-    const { register, getValues } = useFormContext();
+const DeliveryDetailStep = () => {
+    const { register, getValues, setValue } = useFormContext();
+    useWatch({ name: 'Send as dropshipper' });
     const dropshipperState = getValues('Send as dropshipper')
 
     useEffect(() => {
-
-        setData((prev) => {
-            return { ...prev, dropshipFee: 0 };
-        })
-        if (dropshipperState)
-            setData((prev) => {
-                return { ...prev, dropshipFee: 5900 };
-            })
+        setValue('dropshipFee', 0)
+        if (dropshipperState) setValue('dropshipFee', 5900)
     }, [dropshipperState])
     return (
         <div title="Delivery Details">
@@ -29,4 +24,4 @@ const DeliveryDetails = ({ setData, Shipment }) => {
     );
 }
 
-export default DeliveryDetails
+export default DeliveryDetailStep

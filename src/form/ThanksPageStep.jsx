@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-const ThanksPage = ({ Shipment }) => {
+const ThanksPageStep = () => {
+    const { getValues } = useFormContext();
     const [orderId, setOrderId] = useState('')
+    const Shipment = getValues('Shipment')
+
 
     const alphaNumericGenerator = () => {
         const length = 5
@@ -25,4 +28,4 @@ const ThanksPage = ({ Shipment }) => {
     );
 }
 
-export default ThanksPage
+export default ThanksPageStep

@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useFormContext, useWatch } from 'react-hook-form';
 
-const Summary = ({ goods, Shipment, dropshipFee }) => {
+const Summary = () => {
+    const { getValues, setValue } = useFormContext();
+
+    const Shipment = getValues('Shipment')
+    const goods = getValues('goods')
+    const dropshipFee = getValues('dropshipFee')
+    useWatch({ name: 'dropshipFee', name: 'Shipment' })
+
     const currencyFormatter = new Intl.NumberFormat({
         style: "currency",
     });
-    const shipmentPrice = Shipment?.price ? Shipment.price : 0
+
+    const shipmentPrice = Shipment.price
     const total = goods + dropshipFee + shipmentPrice
+
     return (
 
         <>
             <h4>Summary</h4>
             <p>10 items purchased</p>
 
-            {Shipment?.estimation &&
+            {Shipment.estimation &&
                 <>
                     <h5>Delivery estimation</h5>
                     <h4>{Shipment.estimation} by {Shipment.label}</h4>
