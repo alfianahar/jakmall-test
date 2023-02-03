@@ -1,8 +1,20 @@
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
-const DeliveryDetails = () => {
+const DeliveryDetails = ({ setData, Shipment }) => {
     const { register, getValues } = useFormContext();
     const dropshipperState = getValues('Send as dropshipper')
+
+    useEffect(() => {
+
+        setData((prev) => {
+            return { ...prev, dropshipFee: 0 };
+        })
+        if (dropshipperState)
+            setData((prev) => {
+                return { ...prev, dropshipFee: 5900 };
+            })
+    }, [dropshipperState])
     return (
         <div title="Delivery Details">
             <h1>Delivery Details</h1>

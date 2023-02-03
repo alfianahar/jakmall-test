@@ -1,66 +1,67 @@
 import { useEffect, useState } from 'react';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
+import Summary from './components/Summary';
 import DeliveryDetails from './form/DeliveryDetails';
 import Shipment from './form/Shipment';
 import ThanksPage from './form/ThanksPage';
 import useMultistep from './utils/useMultistep';
 
-
-// const INITIAL_DATA = {
-//   email: "",
-//   phoneNumber: "",
-//   deliveryAdress: "",
-//   SendAsDropshipper: false,
-//   dropshipperName: "",
-//   dropshipperPhoneNumber: "",
-//   shipment: {label: "", estimation: "", price: 0},
-//   payment: ""
-// };
+const pageStep = ["Delivery", "Payment", "Finish"]
+const backPageStep = ["Cart", "Delivery"]
 
 function App() {
-  const methods = useForm();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ goods: 500000, dropshipFee: 0, 'Send as dropshipper': false, Shipment: { label: '', estimation: '', price: 0 } });
+  const methods = useForm({
+    defaultValues: async () => {
+      const itemSaved = JSON.parse(localStorage.getItem('itemSaved'))
+      console.log(itemSaved)
+      if (itemSaved) return itemSaved
+      return { goods: 500000, dropshipFee: 0, 'Send as dropshipper': false, Shipment: { label: '', estimation: '', price: 0 } }
+    }
+  });
+  const value = methods.getValues()
+  console.log(value)
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistep([
-      <DeliveryDetails {...data} />,
+      <DeliveryDetails {...data} setData={setData} />,
       <Shipment {...data} />,
       <ThanksPage {...data} />,
-      // <AddressForm {...data} updateFields={updateFields} />,
-      // <AccountForm {...data} updateFields={updateFields} />,
     ]);
 
   const onSubmit = (data) => {
-    // data.preventDefault();
-    console.log(data);
     if (!isLastStep) return next();
-    alert('Your Account Succesfully Created');
+    methods.setValue('Page State', pageStep[currentStepIndex]);
   }
 
   const handleChange = () => {
     const value = methods.getValues()
-    console.log(data.Shipment);
-    setData(value)
-    if (data.Shipment.label === 'GO-SEND') {
-      methods.setValue('Shipment.estimation', 'today');
-      methods.setValue('Shipment.price', 15000)
-    }
-    if (data.Shipment.label === 'JNE') {
-      methods.setValue('Shipment.estimation', '2 day');
-      methods.setValue('Shipment.price', 9000)
-    }
-    if (data.Shipment.label === 'Personal Courier') {
-      methods.setValue('Shipment.estimation', '1 day');
-      methods.setValue('Shipment.price', 29000)
-    }
+    setData((prev) => {
+      return { ...prev, ...value };
+    })
+    localStorage.setItem('itemSaved', JSON.stringify(value));
+    console.log(data);
   }
+
+  // useEffect(() => {
+  //   const valueSaved = JSON.parse(localStorage.getItem('itemSaved'));
+  //   setData(valueSaved)
+  //   console.log('getitem', data);
+  // }, [])
 
   return (
     <FormProvider {...methods} >
       <form onChange={handleChange} onSubmit={methods.handleSubmit(onSubmit)}>
-        <div style={{ position: 'absolute', top: '.5rem', right: '.5rem' }}>
-          {currentStepIndex + 1} / {steps.length}
+        <div >
+          <h1>
+            {pageStep[currentStepIndex]}
+          </h1>
         </div>
+        {!isLastStep && (
+          <button type="button" onClick={back}>
+            Back to {backPageStep[currentStepIndex]}
+          </button>
+        )}
         {step}
         <div
           style={{
@@ -70,13 +71,10 @@ function App() {
             justifyContent: 'flex-end',
           }}
         >
-          {!isFirstStep && (
-            <button type="button" onClick={back}>
-              Back
-            </button>
-          )}
-          <button type="submit">{isLastStep ? 'Finish' : 'Next'}</button>
+
+          {!isLastStep && <button type="submit">{currentStepIndex !== steps.length - 2 ? 'Continue to Payment' : data.Payment ? `Pay with ${data.Payment}` : 'Pay'}</button>}
         </div>
+        <Summary {...data} />
       </form>
     </FormProvider>
   );

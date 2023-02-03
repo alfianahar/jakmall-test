@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 const ThanksPage = ({ Shipment }) => {
     const [orderId, setOrderId] = useState('')
 
-    const randomString = () => {
+    const alphaNumericGenerator = () => {
         const length = 5
         const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ'
         let result = '';
@@ -12,7 +12,7 @@ const ThanksPage = ({ Shipment }) => {
         return setOrderId(result);
     }
     useEffect(() => {
-        randomString()
+        alphaNumericGenerator()
     }, [])
     return (
         <div title="Thank You">
