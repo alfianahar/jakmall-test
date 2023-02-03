@@ -1,27 +1,24 @@
-
-
-
-import { useState } from "react";
 import styled from "styled-components";
+import Layout from "./Layout";
 
 const BasicContainer = styled.div`
   position: absolute;
-  width: 1100px;
-  height: 550px;
-  left: 50px;
-  top: 55px;
+  width: 90%;
+  height: 90%;
   background: #FFFFFF;
   box-shadow: 2px 10px 20px rgba(255, 138, 0, 0.1);
   border-radius: 4px;
 `;
 
 const Container = ({ title, children }) => {
-    const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <BasicContainer>
-            {children}
-        </BasicContainer>
+        <Layout>
+
+            <BasicContainer>
+                {children}
+            </BasicContainer>
+        </Layout>
     );
 };
 
