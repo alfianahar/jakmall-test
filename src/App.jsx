@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useForm, FormProvider, useFormContext, useWatch } from 'react-hook-form';
+import Container from './components/Container';
 import Summary from './components/Summary';
 import DeliveryDetailStep from './form/DeliveryDetailStep';
 import ShipmentStep from './form/ShipmentStep';
@@ -43,33 +44,36 @@ function App() {
   }, [data, currentStepIndex])
 
   return (
-    <FormProvider {...methods} >
-      <form onChange={handleChange} onSubmit={methods.handleSubmit(onSubmit)}>
-        <div >
-          <h1>
-            {pageStep[currentStepIndex]}
-          </h1>
-        </div>
-        {!isLastStep && (
-          <button type="button" onClick={back}>
-            Back to {backPageStep[currentStepIndex]}
-          </button>
-        )}
-        {step}
-        <div
-          style={{
-            marginTop: '1rem',
-            display: 'flex',
-            gap: '.5rem',
-            justifyContent: 'flex-end',
-          }}
-        >
+    <Container>
+      <FormProvider {...methods} >
 
-          {!isLastStep && <button type="submit">{currentStepIndex !== steps.length - 2 ? 'Continue to Payment' : data.Payment ? `Pay with ${data.Payment}` : 'Pay'}</button>}
-        </div>
-        <Summary />
-      </form>
-    </FormProvider>
+        <form onChange={handleChange} onSubmit={methods.handleSubmit(onSubmit)}>
+          <div >
+            <h1>
+              {pageStep[currentStepIndex]}
+            </h1>
+          </div>
+          {!isLastStep && (
+            <button type="button" onClick={back}>
+              Back to {backPageStep[currentStepIndex]}
+            </button>
+          )}
+          {step}
+          <div
+            style={{
+              marginTop: '1rem',
+              display: 'flex',
+              gap: '.5rem',
+              justifyContent: 'flex-end',
+            }}
+          >
+
+            {!isLastStep && <button type="submit">{currentStepIndex !== steps.length - 2 ? 'Continue to Payment' : data.Payment ? `Pay with ${data.Payment}` : 'Pay'}</button>}
+          </div>
+          <Summary />
+        </form>
+      </FormProvider>
+    </Container>
   );
 }
 
