@@ -40,9 +40,9 @@ function App() {
   return (
     <Container>
       <FormProvider {...methods} >
+        <Stepper currentStep={currentStepIndex + 1} />
         <Form next={next} isLastStep={isLastStep}>
           <>
-            <Stepper currentStep={currentStepIndex + 1} />
             {!isLastStep && (
               <button type="button" onClick={back}>
                 Back to {backPageStep[currentStepIndex]}
