@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react'
 import { useFormContext, useWatch } from 'react-hook-form';
+import styled from "styled-components";
+
+
+const SummaryContainer = styled.div`
+
+`;
 
 const Summary = () => {
     const { getValues, setValue } = useFormContext();
@@ -17,8 +23,7 @@ const Summary = () => {
     const total = goods + dropshipFee + shipmentPrice
 
     return (
-
-        <>
+        <SummaryContainer>
             <h4>Summary</h4>
             <p>10 items purchased</p>
 
@@ -44,7 +49,7 @@ const Summary = () => {
             <h4>Total</h4> <span>{total}</span>
 
 
-        </>
+        </SummaryContainer>
     )
 }
 
