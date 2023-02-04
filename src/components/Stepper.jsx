@@ -83,12 +83,12 @@ const Stepper = ({ currentStep }) => {
                         <Circle active={currentStep >= 1}>1</Circle>
                         Delivery
                     </Step>
-                    <i style={{ color: '#FF8A00' }} class='bx bxs-chevron-right'></i>
+                    <i style={{ color: '#FF8A00' }} className='bx bxs-chevron-right'></i>
                     <Step active={currentStep >= 1}>
                         <Circle active={currentStep >= 2}>2</Circle>
                         Payment
                     </Step>
-                    <i style={{ color: '#FF8A00' }} class='bx bxs-chevron-right'></i>
+                    <i style={{ color: '#FF8A00' }} className='bx bxs-chevron-right'></i>
                     <Step active={currentStep >= 1}>
                         <Circle active={currentStep >= 3}>3</Circle>
                         Finish

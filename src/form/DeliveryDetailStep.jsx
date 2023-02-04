@@ -16,7 +16,12 @@ const DeliveryDetailStep = () => {
     return (
         <FormStep title="Delivery Details">
             <MainTittle>Delivery Details</MainTittle>
-            <Input type="text" placeholder="Email" {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />
+            <div class="floating">
+                <input className="floating__input" type="text" placeholder="Email" {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />
+                <label for="inputId" class="floating__label" data-content="Email">
+                    <span class="hidden--visually">Email</span>
+                </label>
+            </div>
 
             <input type="tel" placeholder="Phone number" {...register("Phone number", { required: true, minLength: 6, maxLength: 20, pattern: /^[0-9\-+(),]+$/i })} />
             <textarea placeholder="Delivery Address" {...register("Delivery Address", { required: true })} />

@@ -17,10 +17,10 @@ const BackButton = styled.button`
 `;
 
 
-const BackPageButton = ({ title, children }) => {
+const BackPageButton = ({ title, children, back }) => {
 
     return (
-        <BackButton>
+        <BackButton type="button" onClick={back}>
             {children}
         </BackButton>
     );

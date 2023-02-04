@@ -46,8 +46,8 @@ function App() {
         <Form next={next} isLastStep={isLastStep}>
           <MainContainer>
             {!isLastStep && (
-              <BackPageButton type="button" onClick={back}>
-                <i class='bx bx-left-arrow-alt'></i>
+              <BackPageButton back={back}>
+                <i className='bx bx-left-arrow-alt'></i>
                 Back to {backPageStep[currentStepIndex]}
               </BackPageButton>
             )}
