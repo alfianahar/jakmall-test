@@ -10,16 +10,16 @@ const SummaryContainer = styled.div`
 const Summary = () => {
     const { getValues, setValue } = useFormContext();
 
-    const Shipment = getValues('Shipment')
+    const shipment = getValues('shipment')
     const goods = getValues('goods')
     const dropshipFee = getValues('dropshipFee')
-    useWatch({ name: 'dropshipFee', name: 'Shipment' })
+    useWatch({ name: 'dropshipFee', name: 'shipment' })
 
     const currencyFormatter = new Intl.NumberFormat({
         style: "currency",
     });
 
-    const shipmentPrice = Shipment.price
+    const shipmentPrice = shipment.price
     const total = goods + dropshipFee + shipmentPrice
 
     return (
@@ -27,10 +27,10 @@ const Summary = () => {
             <h4>Summary</h4>
             <p>10 items purchased</p>
 
-            {Shipment.estimation &&
+            {shipment.estimation &&
                 <>
                     <h5>Delivery estimation</h5>
-                    <h4>{Shipment.estimation} by {Shipment.label}</h4>
+                    <h4>{shipment.estimation} by {shipment.label}</h4>
                 </>
             }
             <div>
@@ -43,7 +43,7 @@ const Summary = () => {
             }
             {shipmentPrice !== 0 &&
                 <div>
-                    <p>{Shipment.label} shipment</p> <span>{currencyFormatter.format(shipmentPrice)}</span>
+                    <p>{shipment.label} shipment</p> <span>{currencyFormatter.format(shipmentPrice)}</span>
                 </div>
             }
             <h4>Total</h4> <span>{total}</span>

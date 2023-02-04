@@ -16,20 +16,20 @@ const DeliveryDetailStep = () => {
     return (
         <FormStep title="Delivery Details">
             <MainTittle>Delivery Details</MainTittle>
-            <div class="floating">
-                <input className="floating__input" type="text" placeholder="Email" {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />
-                <label for="inputId" class="floating__label" data-content="Email">
-                    <span class="hidden--visually">Email</span>
-                </label>
-            </div>
 
-            <input type="tel" placeholder="Phone number" {...register("Phone number", { required: true, minLength: 6, maxLength: 20, pattern: /^[0-9\-+(),]+$/i })} />
+            <Input type='text' label="Email" name="Email" required={true} pattern='/^\S+@\S+$/i' />
+            <Input type="tel" label="Phone Number" name="phoneNumber"
+                required={true} minLength='6' maxLength='20' pattern='/^[0-9\-+(),]+$/i'
+            />
+            <Input type="textarea" label="Delivery Address" name="deliveryAddress" required={true} />
             <textarea placeholder="Delivery Address" {...register("Delivery Address", { required: true })} />
 
             <input type="checkbox" placeholder="Send as dropshipper" {...register("Send as dropshipper", {})} />
 
-            <input type="text" placeholder="Dropshipper name" disabled={!dropshipperState} {...register("Dropshipper name", { required: dropshipperState, maxLength: 100 })} />
-            <input type="tel" placeholder="Dropshipper phone number" disabled={!dropshipperState}{...register("Dropshipper phone number", { required: dropshipperState, minLength: 6, maxLength: 20, pattern: /^[0-9\-+(),]+$/i })} />
+            <Input disabled={!dropshipperState} type='text' label="Dropshipper name" name="dropshipperName" required={dropshipperState} maxLength='100' />
+            <Input disabled={!dropshipperState} type='text' label="Dropshipper phone" name="dropshipperPhone" required={dropshipperState} minLength='6' maxLength='20' pattern='/^[0-9\-+(),]+$/i' />
+            {/* <input type="tel" placeholder="Dropshipper name" disabled={!dropshipperState} {...register("Dropshipper name", { required: dropshipperState, maxLength: 100 })} />
+            <input type="tel" placeholder="Dropshipper phone number" disabled={!dropshipperState}{...register("Dropshipper phone number", { required: dropshipperState, minLength: 6, maxLength: 20, pattern: /^[0-9\-+(),]+$/i })} /> */}
 
         </FormStep>
     );

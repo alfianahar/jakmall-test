@@ -5,7 +5,7 @@ import MainTittle from "../components/MainTittle";
 const ThanksPageStep = () => {
     const { getValues } = useFormContext();
     const [orderId, setOrderId] = useState('')
-    const Shipment = getValues('Shipment')
+    const shipment = getValues('shipment')
 
 
     const alphaNumericGenerator = () => {
@@ -22,7 +22,7 @@ const ThanksPageStep = () => {
         <div title="Thank You">
             <MainTittle>Thank You</MainTittle>
             <h5>Order ID: {orderId}</h5>
-            <p>Your order will be delivered {Shipment.estimation} with {Shipment.label}</p>
+            <p>Your order will be delivered {shipment.estimation} with {shipment.label}</p>
 
 
         </div>

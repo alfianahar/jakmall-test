@@ -14,7 +14,7 @@ import useMultistep from './utils/useMultistep';
 
 const backPageStep = ["Cart", "Delivery"]
 const defaultValue = {
-  goods: 500000, dropshipFee: 0, 'Send as dropshipper': false, Shipment: { label: '', estimation: '', price: 0 }
+  goods: 500000, dropshipFee: 0, sendAsDropshipper: false, shipment: { label: '', estimation: '', price: 0 }
 }
 
 function App() {
