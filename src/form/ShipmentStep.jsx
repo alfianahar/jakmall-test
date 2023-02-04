@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
+import MainTittle from "../components/MainTittle";
 
 const ShipmentStep = () => {
     const { register, setValue, getValues } = useFormContext();
@@ -7,7 +8,7 @@ const ShipmentStep = () => {
 
     return (
         <div title="Shipment">
-            <h1>Shipment</h1>
+            <MainTittle>Shipment</MainTittle>
             <input {...register("Shipment.label", { required: true })} type="radio" onChange={() => setValue('Shipment', { label: 'GO-SEND', estimation: 'today', price: 15000 })} value='GO-SEND' /> GO-SEND
             <input {...register("Shipment.label", { required: true })} type="radio" onChange={() => setValue('Shipment', { label: 'JNE', estimation: '2 day', price: 9000 })} value='JNE' /> JNE
             <input {...register("Shipment.label", { required: true })} type="radio" onChange={() => setValue('Shipment', { label: 'Personal Courier', estimation: '1 day', price: 29000 })} value='Personal Courier' /> Personal Courier

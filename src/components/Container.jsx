@@ -10,12 +10,17 @@ const BasicLayout = styled.div`
 `;
 
 const BasicContainer = styled.div`
-  height: 85%;
-  width: 100%;
-  padding: 2rem 1rem;
-  background: #FFFFFF;
-  box-shadow: 2px 10px 20px rgba(255, 138, 0, 0.1);
-  border-radius: 4px;
+    height: 85%;
+    width: 100%;
+    padding: 2rem 1rem;
+    background: #FFFFFF;
+    box-shadow: 2px 10px 20px rgba(255, 138, 0, 0.1);
+    border-radius: 4px;
+
+    @media only screen and (min-width: 800px) {
+        padding: 2rem 2.5rem;
+
+    }
 `;
 
 const Container = ({ title, children }) => {

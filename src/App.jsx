@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useForm, FormProvider, useFormContext, useWatch } from 'react-hook-form';
+import BackPageButton from './components/BackPageButton';
 import Container from './components/Container';
 import Form from './components/Form';
+import MainContainer from './components/MainContainer';
 import RightContainer from './components/RightContainer';
 import Stepper from './components/Stepper';
 import Summary from './components/Summary';
@@ -42,11 +44,12 @@ function App() {
       <FormProvider {...methods} >
         <Stepper currentStep={currentStepIndex + 1} />
         <Form next={next} isLastStep={isLastStep}>
-          <>
+          <MainContainer>
             {!isLastStep && (
-              <button type="button" onClick={back}>
+              <BackPageButton type="button" onClick={back}>
+                <i class='bx bx-left-arrow-alt'></i>
                 Back to {backPageStep[currentStepIndex]}
-              </button>
+              </BackPageButton>
             )}
             {step}
             <div
@@ -59,7 +62,7 @@ function App() {
             >
 
             </div>
-          </>
+          </MainContainer>
           <RightContainer>
             <Summary />
             {!isLastStep && <button type="submit">{currentStepIndex !== steps.length - 2 ? 'Continue to Payment' : data.Payment ? `Pay with ${data.Payment}` : 'Pay'}</button>}

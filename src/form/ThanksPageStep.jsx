@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import MainTittle from "../components/MainTittle";
 
 const ThanksPageStep = () => {
     const { getValues } = useFormContext();
@@ -19,7 +20,7 @@ const ThanksPageStep = () => {
     }, [])
     return (
         <div title="Thank You">
-            <h1>Thank You</h1>
+            <MainTittle>Thank You</MainTittle>
             <h5>Order ID: {orderId}</h5>
             <p>Your order will be delivered {Shipment.estimation} with {Shipment.label}</p>
 
