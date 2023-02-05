@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import MainTittle from "../components/MainTittle";
+import { MainTittle } from "../components/MainTittle";
 
 const shipmentStep = () => {
     const { register, setValue, getValues } = useFormContext();

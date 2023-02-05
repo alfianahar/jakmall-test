@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useFormContext, useWatch } from 'react-hook-form';
 import styled from "styled-components";
+import { BasicTitle } from './MainTittle';
 
 
 const SummaryContainer = styled.div`
@@ -24,7 +25,9 @@ const Summary = () => {
 
     return (
         <SummaryContainer>
-            <h4>Summary</h4>
+            <BasicTitle>
+                Summary
+            </BasicTitle>
             <p>10 items purchased</p>
 
             {shipment.estimation &&

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const BasicLayout = styled.div`
   background-color: #fffae6;
-  height: 100vh;
   padding: 1.75rem 2rem;
   display: flex;
   justify-content: center;

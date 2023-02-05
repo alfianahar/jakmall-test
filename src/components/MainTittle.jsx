@@ -5,6 +5,10 @@ margin-bottom: 2.25rem;
 height: 3rem;
 `;
 
+const SubTitleLayout = styled.div`
+margin-bottom: .625rem;
+`;
+
 const Title = styled.h1`
 font-family: 'Montserrat';
 font-style: normal;
@@ -13,6 +17,15 @@ font-size: 36px;
 line-height: 44px;
 color: #FF8A00;
 position: relative;
+`;
+
+const Title2 = styled.h1`
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 29px;
+color: #FF8A00;
 `;
 
 const Box = styled.span`
@@ -28,7 +41,7 @@ background-color: #EEEEEE;
 `;
 
 
-const MainTittle = ({ title, children }) => {
+export const MainTittle = ({ children }) => {
 
     return (
         <TitleLayout>
@@ -42,4 +55,13 @@ const MainTittle = ({ title, children }) => {
     );
 };
 
-export default MainTittle;
+export const BasicTitle = ({ children }) => {
+
+    return (
+        <SubTitleLayout>
+            <Title2>
+                {children}
+            </Title2>
+        </SubTitleLayout>
+    );
+};
