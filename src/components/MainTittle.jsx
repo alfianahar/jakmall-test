@@ -13,8 +13,8 @@ const Title = styled.h1`
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 700;
-font-size: 36px;
-line-height: 44px;
+font-size: 2.25rem;
+line-height: 2.75rem;
 color: #FF8A00;
 position: relative;
 `;
@@ -23,8 +23,8 @@ const Title2 = styled.h1`
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 700;
-font-size: 24px;
-line-height: 29px;
+font-size: 1.5rem;
+line-height: 1.77rem;
 color: #FF8A00;
 `;
 

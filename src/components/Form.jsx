@@ -18,6 +18,7 @@ const Form = ({ children, next, isLastStep }) => {
     const { handleSubmit } = useFormContext()
 
     const onSubmit = (data) => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         if (!isLastStep) return next();
     }
     return (

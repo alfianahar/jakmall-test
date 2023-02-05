@@ -1,22 +1,35 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
+import { RadioPayment, RadioShipment } from "../components/Input";
 import { MainTittle } from "../components/MainTittle";
+import RadioContainer from "../components/RadioContainer";
 
 const shipmentStep = () => {
     const { register, setValue, getValues } = useFormContext();
     const shipment = getValues('shipment')
+    const payment = getValues('payment')
 
     return (
         <div title="shipment">
             <MainTittle>shipment</MainTittle>
-            <input {...register("shipment.label", { required: true })} type="radio" onChange={() => setValue('shipment', { label: 'GO-SEND', estimation: 'today', price: 15000 })} value='GO-SEND' /> GO-SEND
-            <input {...register("shipment.label", { required: true })} type="radio" onChange={() => setValue('shipment', { label: 'JNE', estimation: '2 day', price: 9000 })} value='JNE' /> JNE
-            <input {...register("shipment.label", { required: true })} type="radio" onChange={() => setValue('shipment', { label: 'Personal Courier', estimation: '1 day', price: 29000 })} value='Personal Courier' /> Personal Courier
 
-            <h1>Payment</h1>
-            <input {...register("payment", { required: true })} type="radio" value="e-Wallet" /> e-Wallet
-            <input {...register("payment", { required: true })} type="radio" value="Bank Transfer" /> Bank Transfer
-            <input {...register("payment", { required: true })} type="radio" value="Virtual Account " /> Virtual Account
+            <RadioContainer>
+                <RadioShipment target="shipment" checked={shipment.label === 'GO-SEND'} type="radio" name="shipment.label" label='GO-SEND' estimation='today' price={15000} required={true} />
+                <RadioShipment target="shipment" checked={shipment.label === 'JNE'} type="2 day" name="shipment.label" label='JNE' estimation='today' price={9000} required={true} />
+                <RadioShipment target="shipment" checked={shipment.label === 'Personal Courier'} type="radio" name="shipment.label" label='Personal Courier' estimation='today' price={29000} required={true} />
+            </RadioContainer>
+
+
+
+            <MainTittle>Payment</MainTittle>
+            <RadioContainer>
+                <RadioPayment type="radio" label='e-Wallet' name="payment" checked={payment === 'e-Wallet'} required={true} />
+                <RadioPayment type="radio" label='Bank Transfer' name="payment" checked={payment === 'Bank Transfer'} required={true} />
+                <RadioPayment type="radio" label='Virtual Account' name="payment" checked={payment === 'Virtual Account'} required={true} />
+
+
+            </RadioContainer>
+
 
         </div>
     );

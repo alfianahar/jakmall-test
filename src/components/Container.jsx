@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 const BasicLayout = styled.div`
-  background-color: #fffae6;
-  padding: 1.75rem 2rem;
+  padding: 3rem 2rem 1.75rem 2rem;
   display: flex;
   justify-content: center;
-  align-items: center;
+    @media only screen and (min-width: 800px) {
+        padding: 2rem 3rem ;
+    }
 `;
 
 const BasicContainer = styled.div`
-    height: 85%;
+    min-height: 29rem;
     width: 100%;
     padding: 2rem 1rem;
     background: #FFFFFF;
@@ -17,13 +18,11 @@ const BasicContainer = styled.div`
     border-radius: 4px;
 
     @media only screen and (min-width: 800px) {
-        padding: 2rem 2.5rem;
-
+        padding: 2rem 0rem ;
     }
 `;
 
 const Container = ({ title, children }) => {
-
     return (
         <BasicLayout>
             <BasicContainer>

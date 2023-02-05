@@ -9,7 +9,7 @@ const Label = styled.label`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1rem;
   color: #000000;
   mix-blend-mode: normal;
   opacity: 0.4;
@@ -97,7 +97,7 @@ const LabelTextarea = styled.label`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1rem;
   color: #000000;
   mix-blend-mode: normal;
   opacity: 0.4;
@@ -223,8 +223,8 @@ const CheckboxLabel = styled.label`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 0.875rem;
+  line-height: 1.05rem;
   color: #2D2A40;
   mix-blend-mode: normal;
   opacity: 0.8;
@@ -270,6 +270,91 @@ export const Checkbox = ({ name, label, type, checked }) => {
         <CheckboxLabel>{label}</CheckboxLabel>
       </CheckboxLabel>
     </CheckboxContainer>
+  );
+};
+
+const ShipmentRadioContainer = styled.div`
+  background: ${props => (props.checked ? "rgba(27, 217, 123, 0.1)" : "#FFFFFF")};
+  border: ${props => (props.checked ? "2px solid #1BD97B" : "1px solid #CCCCCC")}; ;
+  /* width: 100%; */
+  padding: ${props => (props.payment ? "1.25rem 1rem" : ".75rem 1rem")};
+  margin-top: .5rem;
+
+      @media only screen and (min-width: 800px) {
+    width: 10rem;
+    margin-right: .75rem;
+    }
+`
+
+const RadioFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const HiddenRadio = styled.input.attrs({ type: "radio" })`
+  opacity: 0;
+  position: absolute;
+  z-index: 100;
+  width: 75%;
+  height: 4rem;
+  cursor: pointer;
+
+  @media only screen and (min-width: 800px) {
+    width: 10rem;
+    margin-right: .75rem;
+  }
+`
+
+const ShipmentLabel = styled.label`
+  font-weight: 500;
+  font-size: ${props => (props.payment ? "1rem" : ".0.875rem")}; 
+  line-height: 1.05rem;
+  color: #2D2A40;
+  mix-blend-mode: normal;
+  opacity: 0.8;
+  display: flex;
+  height: 2.25rem;
+  flex-direction: column;
+  justify-content: center;
+`
+
+export const RadioShipment = ({ name, target, label, estimation, price, type, checked, ...rest }) => {
+  const { register, setValue } = useFormContext()
+  const value = { label: label, estimation: estimation, price: price }
+
+  return (
+    <ShipmentRadioContainer checked={checked} onClick={() => setValue(target, value)}>
+      <RadioFlex>
+        <ShipmentLabel>
+          <h5 style={{ marginBottom: '4px' }}>{label}</h5>
+          <h2>{price}</h2>
+        </ShipmentLabel>
+        {checked &&
+          <i style={{ color: '#1bd97b' }} className='bx bx-md bx-check'></i>}
+
+        <HiddenRadio type={type} {...register(name, { ...rest })} value={label} />
+      </RadioFlex>
+    </ShipmentRadioContainer>
+  );
+};
+
+export const RadioPayment = ({ name, label, type, checked, ...rest }) => {
+  const { register } = useFormContext()
+
+  return (
+    <ShipmentRadioContainer payment checked={checked} >
+      <RadioFlex>
+        <ShipmentLabel payment>
+          {label}
+        </ShipmentLabel>
+        {/* <h4 style={{ height: '2.2rem' }}>{label}</h4> */}
+        {checked &&
+          <i style={{ color: '#1bd97b' }} className='bx bx-md bx-check'></i>}
+
+        <HiddenRadio type={type} {...register(name, { ...rest })} value={label} />
+      </RadioFlex>
+    </ShipmentRadioContainer>
   );
 };
 

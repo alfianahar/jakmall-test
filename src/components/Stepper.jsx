@@ -9,7 +9,10 @@ const StepperLayout = styled.div`
     align-items: center;
     width: 100%;
     margin-top: -4rem;
-    margin-bottom: 2rem
+    margin-bottom: 2rem;
+    @media only screen and (min-width: 800px) {
+        margin-bottom: 0.5rem;
+  }
 `;
 
 const StepperBackground = styled.div`
@@ -38,13 +41,13 @@ const Step = styled.div`
     text-align: center;
     display: flex;
     align-items: center;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: ${props => (props.active ? "#FF8A00" : "#ccc")};
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 1rem;
+    line-height: 1.25rem;
     transform: scale(.75);
 
     @media only screen and (min-width: 800px) {
@@ -67,8 +70,8 @@ const Circle = styled.span`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 1rem;
+    line-height: 1.25rem;
     text-align: center;
 `;
 

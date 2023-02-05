@@ -11,13 +11,31 @@ import DeliveryDetailStep from './form/DeliveryDetailStep';
 import ShipmentStep from './form/ShipmentStep';
 import ThanksPageStep from './form/ThanksPageStep';
 import useMultistep from './utils/useMultistep';
+import styled from "styled-components";
+import PayButton from './components/PayButton';
+
 
 const backPageStep = ["Cart", "Delivery"]
 const defaultValue = {
   goods: 500000, dropshipFee: 0, sendAsDropshipper: false, shipment: { label: '', estimation: '', price: 0 }
 }
 
-function App() {
+const Splitter = styled.div`
+    border-bottom: 1px solid #D8D8D8;
+    mix-blend-mode: normal;
+    margin: 1.25rem 0rem;
+    margin-top: 2rem;
+
+
+    @media only screen and (min-width: 800px) {
+      border-left: 1px solid #FF8A00;
+      opacity: 0.2;
+      margin-top: 0rem;
+
+    }
+`
+
+const App = () => {
   const methods = useForm({
     defaultValues: useMemo(() => {
       const itemSaved = JSON.parse(localStorage.getItem('itemSaved'))
@@ -43,29 +61,22 @@ function App() {
     <Container>
       <FormProvider {...methods} >
         <Stepper currentStep={currentStepIndex + 1} />
+        {!isLastStep && (
+          <BackPageButton back={back}>
+            <i className='bx bx-left-arrow-alt'></i>
+            Back to {backPageStep[currentStepIndex]}
+          </BackPageButton>
+        )}
         <Form next={next} isLastStep={isLastStep}>
-          <MainContainer>
-            {!isLastStep && (
-              <BackPageButton back={back}>
-                <i className='bx bx-left-arrow-alt'></i>
-                Back to {backPageStep[currentStepIndex]}
-              </BackPageButton>
-            )}
+          <MainContainer step={currentStepIndex}>
             {step}
-            <div
-              style={{
-                marginTop: '1rem',
-                display: 'flex',
-                gap: '.5rem',
-                justifyContent: 'flex-end',
-              }}
-            >
-
-            </div>
           </MainContainer>
+
+          <Splitter />
+
           <RightContainer>
             <Summary />
-            {!isLastStep && <button type="submit">{currentStepIndex !== steps.length - 2 ? 'Continue to Payment' : data.Payment ? `Pay with ${data.Payment}` : 'Pay'}</button>}
+            {!isLastStep && <PayButton>{currentStepIndex !== steps.length - 2 ? 'Continue to Payment' : data.payment ? `Pay with ${data.payment}` : 'Pay'}</PayButton>}
 
           </RightContainer>
         </Form>
