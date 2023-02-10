@@ -52,7 +52,7 @@ const App = () => {
     ]);
 
   useEffect(() => {
-    console.log(data)
+    // console.log(data)
     localStorage.setItem('itemSaved', JSON.stringify(data));
     if (isLastStep) return localStorage.removeItem('itemSaved');
   }, [data, currentStepIndex])

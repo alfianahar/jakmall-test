@@ -14,7 +14,7 @@ const Mcontainer = styled.div`
 `;
 
 const MainContainer = ({ step, children }) => {
-  console.log(step)
+  // console.log(step)
   return (
     <Mcontainer thanks={step === 2}>
       {children}
